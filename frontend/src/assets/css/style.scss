@@ -4,16 +4,22 @@ $secondary-color : #cdcd10 ;
 $text-color : #040400 ;
 $text-white: #fff;
 $dark-background : #222725 ;
+$light-background : #a4b2ac ;
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
 body{
   font-family: "Rubik", sans-serif;
 }
-
+.small{
+  padding: 10px 20px;
+}
+.large{
+  padding: 15px 20px;
+}
 .btn-primary{
   background-color : $primary-color;
   border: 1px solid $primary-color;
-  padding: 15px 20px;
+  
   font-size: 1em;
   font-weight: 500;
   text-transform: uppercase;
@@ -26,7 +32,7 @@ body{
 .btn-secondary{
   background-color : $secondary-color;
   border: 1px solid $secondary-color;
-  padding: 15px 20px;
+  
   font-size: 1em;
   font-weight: 500;
   text-transform: uppercase;
@@ -43,10 +49,18 @@ h2{
   font-size: 3em;
 }
 h3{
-  font-size: 2em;
+  font-size: 1.5em;
 }
 p{
   font-size: 1.2em;
+}
+a{
+  text-decoration: none;
+  color: $primary-color;
+  &:hover{
+    color: $secondary-color;
+
+  }
 }
 ul{
   margin-left: 0;
@@ -57,6 +71,10 @@ ul{
   }
 }
 
+.bg-light{
+  background-color: $light-background;
+}
+
 header{
   nav{
     .nav-link{
@@ -65,6 +83,9 @@ header{
       font-size: 1em;
       font-weight: 500;
       margin-left: 20px ;
+      &:hover{
+        color: $primary-color;
+      }
     }
     .logo{
       text-transform: uppercase;
@@ -74,6 +95,17 @@ header{
         color: $primary-color;
       }
     }
+  }
+}
+
+.section-header{
+  span{
+    color: $primary-color;
+    font-size: 1.2em;
+    color: #d90ecf;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: 500;
   }
 }
 
@@ -120,5 +152,166 @@ footer{
     color: $primary-color;
     font-size: 1.2em;
     font-weight: 500;
+  }
+}
+
+.section-3{
+  .item{
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+    &:hover{
+      .service-body{
+        transform: translateY(0%);
+        .service-content{
+          opacity: 1;
+        }
+      }
+    }
+    .service-image{
+      position: relative;
+      overflow: hidden;
+      img{
+        width: 100%;
+        border-radius:40px ;
+        aspect-ratio: 1 / 1.2;
+        object-fit: cover;
+      }
+      &:after{
+        content: "";
+        position: absolute;
+        top:0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 40px;
+        background: linear-gradient(180deg , rgba(217 , 217 ,217 ,0) 0% , rgba(217 ,217 , 217 ,0) 13.02% , 
+        rgba(0,0,0,0.51) 42.5% , rgba(0,0,0,0.63) 70% , #000000 100%);
+      }
+    }
+    .service-body{
+      color: $text-white;
+      position: absolute;
+      left: 30px;
+      right: 30px;
+      bottom: 30px;
+      transform: translateY(80%);
+      transition: all 0.4s ease-in-out;
+      .service-content{
+        transition: all 0.4 ease-in-out;
+        opacity: 0;
+      }
+    }
+  }
+}
+
+.section-4{
+  .card{
+    margin-bottom: 20px;
+    border-radius: 40px;
+  }
+}
+
+.section-5{
+  .swiper{
+    padding: 25px 25px 50px 25px;
+    .swiper-pagination-bullet-active{
+      background-color: $secondary-color;
+    }
+  }
+  .card{
+    border-radius: 40px;
+    .card-body{
+      .rating{
+        color: $secondary-color;
+      }
+      .content{
+        p{font-size: 1em;}
+      }
+      .meta{
+        img{
+          border-radius: 50%;
+        }
+      }
+      .name{
+        font-size: 1.3em;
+        font-weight: 500;
+      }
+    }
+  }
+
+}
+
+.section-6{
+  .card{
+    border-radius: 40px;
+    img{
+      border-top-left-radius: 40px;
+      border-top-right-radius: 40px;
+    }
+    .card-body{
+      a.title{
+        font-size: 1.4em;
+      }
+    }
+  }
+}
+
+.section-7{
+  .hero{
+    background: linear-gradient(to right , rgba(0, 0, 0, 0.8) , rgba(0, 0, 0, 0) , ), url('/src/assets/images/hero.jpg') ;
+    min-height: 500px;
+    color:$text-white ;
+    span{
+      color: $secondary-color;
+      font-size: 1.5em;
+      font-weight: 500;
+    }
+  }
+}
+
+.section-8{
+  .card{
+    border-radius: 40px;
+    img{
+      border-top-left-radius: 40px;
+      border-top-right-radius: 40px;
+    }
+    .card-body{
+      a.title{
+        font-size: 1.4em;
+      }
+      .card-title{
+        font-size: 1.5em;
+        font-weight: 500;
+        
+      }
+      .card-sub-title{
+        font-size: 1.2em;
+        font-weight: 500;
+        color:$light-background ;
+      }
+    }
+  }
+}
+
+.section-9{
+  .card{
+    border-radius: 40px;
+    .card-body{
+
+    }
+  }
+}
+
+.login-form{
+  .card{
+    width: 450px;
+  }
+}
+
+.dashboard{
+  .card{
+    min-height: 400px;
   }
 }
