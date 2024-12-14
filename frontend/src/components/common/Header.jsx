@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { AuthContext } from '../backend/context/Auth';
+
 const Header = () => {
+  const {user} = useContext(AuthContext);
   return (
     <header>
     <div className="container py-3">
@@ -30,6 +33,16 @@ const Header = () => {
             <Nav.Link href="/contact-us" className="nav-link">
               Contact Us
             </Nav.Link>
+            {!user ? (
+                <Nav.Link href="/admin/login" className="nav-link btn btn-primary text-white">
+                  Login
+                </Nav.Link>
+              ) : (
+                <Nav.Link href="/admin/dashboard" className="nav-link btn btn-primary text-white">
+                  Dashboard
+                </Nav.Link>
+              )}
+          
           </Nav>
         </Navbar.Collapse>
       </Navbar>

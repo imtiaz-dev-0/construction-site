@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {  Route, Routes } from 'react-router-dom';
 import Home from './components/frontend/Home';
 import About from './components/frontend/About';
 import './assets/css/style.scss';
@@ -11,12 +11,13 @@ import Login from './components/backend/Login';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Dashboard from './components/backend/Dashboard';
+import RequriedAuth from './components/common/RequriedAuth';
 
 function App() {
 
   return (
     <>
-      <BrowserRouter>
+      
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/about' element={<About/>}/>
@@ -25,9 +26,13 @@ function App() {
           <Route path='/blogs' element={<Blogs/>}/>
           <Route path='/contact-us' element={<Contact/>}/>
           <Route path='/admin/login' element={<Login/>}/>
-          <Route path='/admin/dashboard' element={<Dashboard/>}/>
+          <Route path='/admin/dashboard' element={
+            <RequriedAuth>
+              <Dashboard/>
+            </RequriedAuth>
+              } />
         </Routes>
-      </BrowserRouter>
+     
       <ToastContainer />
     </>
   )
