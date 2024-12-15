@@ -46,4 +46,6 @@ class TempImageController extends Controller
             'message' => 'image Uploaded successfully!'
         ]);
     }
+    
+   
 }

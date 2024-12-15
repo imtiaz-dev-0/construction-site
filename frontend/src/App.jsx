@@ -12,6 +12,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Dashboard from './components/backend/Dashboard';
 import RequriedAuth from './components/common/RequriedAuth';
+import { default as ShowServices} from './components/backend/services/Show';
+import { default as CreateServices} from './components/backend/services/Create';
 
 function App() {
 
@@ -29,6 +31,16 @@ function App() {
           <Route path='/admin/dashboard' element={
             <RequriedAuth>
               <Dashboard/>
+            </RequriedAuth>
+              } />
+          <Route path='/admin/services' element={
+            <RequriedAuth>
+              <ShowServices/>
+            </RequriedAuth>
+              } />
+          <Route path='/admin/services/create' element={
+            <RequriedAuth>
+              <CreateServices/>
             </RequriedAuth>
               } />
         </Routes>
