@@ -11,6 +11,8 @@ import JoditEditor from 'jodit-react';
 const Create = ({placeholder}) => {
   const editor = useRef(null);
 	const [content, setContent] = useState('');
+	const [isDisable, setIsDisable] = useState(false);
+	const [imageId, setImageId] = useState(null);
 
   const config = useMemo(() => ({
     readonly: false,
@@ -31,7 +33,7 @@ const userToken = token();
    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
-      const newData = {...data , "content" : content}
+      const newData = {...data , "content" : content , "imageId" : imageId}
       const res = await fetch(apiurl+'services' , {
             method: 'POST',
             headers : {
@@ -51,6 +53,35 @@ const userToken = token();
           }
     }
 
+    const handleFile = async (e)=>{
+
+      const formData = new FormData();
+      const file = e.target.files[0];
+      if (!file) {
+        toast.error("No file selected!");
+        return;
+      }    
+      formData.append('image' , file);
+      console.log(formData);
+      const res = await fetch(apiurl+'temp-images' , {
+        method: 'POST',
+        headers : {
+          Accept : 'application/json',
+          Authorization : `Bearer ${userToken}`
+        },
+        body : formData
+      })
+      
+      .then(response => response.json())
+      .then(result =>{
+        if(result.status ==  false){
+          toast.error(result.errors.image[0]); 
+        }else{
+          setImageId(result.data.id);
+        }
+      })
+      
+    }
   return (
    <>
      <Header/>
@@ -115,6 +146,13 @@ const userToken = token();
                     onChange={newContent => {}}
                   />
                   </div>
+
+                  <div className='mb-3'>
+                    <label htmlFor="" className='form-label'>Image</label>
+                    <input type="file" placeholder='Slug' className={`form-control `} onChange={handleFile} />
+                     
+                  </div>
+
                   <div className='mb-3'>
                     <label htmlFor="" className='form-label'>Status</label>
                     <select className='form-control'
@@ -127,7 +165,7 @@ const userToken = token();
                     </select>
                   </div>
 
-                  <button className='btn btn-primary' type="submit">Submit</button>
+                  <button disabled={isDisable} className='btn btn-primary' type="submit">Submit</button>
                 </form>
 
               </div>

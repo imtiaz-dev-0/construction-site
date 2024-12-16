@@ -75,14 +75,14 @@ const Show = () => {
                 {loading ? (
                 <div className='d-flex justify-content-center'>
                    <InfinitySpin
-  visible={true}
-  width="200"
-  color="#4fa94d"
-  ariaLabel="infinity-spin-loading"
-  />
+                  visible={true}
+                  width="200"
+                  color="#4fa94d"
+                  ariaLabel="infinity-spin-loading"
+                  />
                 </div>
                   ) : (
-                <table className='table table-striped'>
+                <table className='table table-striped table-bordered'>
                   <thead>
                     <tr>
                       <th>ID</th>
@@ -94,28 +94,31 @@ const Show = () => {
                   </thead>
                   <tbody>
                     {
-                      services && services.map(service =>{
-                       return (
+                      services && services.length > 0 ? (
+                        services.map(service => (
                           <tr key={service.id}>
                             <td>{service.id}</td>
                             <td>{service.title}</td>
                             <td>{service.slug}</td>
                             <td>  
                               {
-                                (service.status === 1) 
-                                  ?<span className="text-white bg-success" style={{ borderRadius: '5px', padding: '2px 4px 2px 4px' }}>Active</span> 
-                                  : <span className="text-white bg-danger" style={{ borderRadius: '5px', padding: '2px 4px 2px 4px' }} >Inactive</span>
+                                service.status === 1 
+                                  ? <span className="text-white bg-success" style={{ borderRadius: '5px', padding: '2px 4px' }}>Active</span> 
+                                  : <span className="text-white bg-danger" style={{ borderRadius: '5px', padding: '2px 4px' }}>Inactive</span>
                               }
                             </td>
                             <td>
-                              <a href="" className='btn btn-primary btn-sm'>Edit</a>
-                              <button className='btn btn-secondary  btn-sm ms-2'  onClick={(e) => handleDelete(service.id)} >Delete</button>
+                              <Link to={`/admin/services/edit/${service.id}`} className='btn btn-primary btn-sm'>Edit</Link>
+                              <button className='btn btn-secondary btn-sm ms-2' onClick={() => handleDelete(service.id)}>Delete</button>
                             </td>
                           </tr>
-                        )
-                      })
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="5" className="text-center">Services not found</td>
+                        </tr>
+                      )
                     }
-                   
                   </tbody>
                 </table>
                   )}
